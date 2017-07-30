@@ -1,0 +1,8 @@
+target remote debuggee:1234
+b write
+c
+x/s $rsi
+x/20xg $rsp
+c
+q
+
