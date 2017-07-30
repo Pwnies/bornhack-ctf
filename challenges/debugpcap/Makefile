@@ -10,3 +10,5 @@ debug.pcap: ./build.sh Dockerfile debuggee.sh debugger.sh gdbscript flag
 	./build.sh
 	
 
+clean:
+	rm -f handout.tar.xz debug.pcap
