@@ -1,0 +1,5 @@
+#!/bin/sh
+CHROOT=/chroot
+CHROOT_USER=`id -u $USER`
+CHROOT_GROUP=`id -g $USER`
+exec chroot --userspec $CHROOT_USER:$CHROOT_GROUP /chroot/ /start
