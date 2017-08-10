@@ -12,6 +12,6 @@ EXPOSE $PORT
 COPY . /app/
 
 USER $USER
-CMD ["/usr/bin/python", "/app/app.py"]
+CMD ["/usr/bin/python", "/app/app.py", "--host", "0.0.0.0"]
 
 
