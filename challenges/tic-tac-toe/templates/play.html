@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>{{ turn }}'s Turn</h2>
+<div class="row text-center">
+        <a href="/move/0" class="btn btn-info">{{ fields[0] }}</a>
+        <a href="/move/1" class="btn btn-info">{{ fields[1] }}</a>
+        <a href="/move/2" class="btn btn-info">{{ fields[2] }}</a>
+</div>
+<div class="row text-center">
+        <a href="/move/3" class="btn btn-info">{{ fields[3] }}</a>
+        <a href="/move/4" class="btn btn-info">{{ fields[4] }}</a>
+        <a href="/move/5" class="btn btn-info">{{ fields[5] }}</a>
+</div>
+<div class="row text-center">
+        <a href="/move/6" class="btn btn-info">{{ fields[6] }}</a>
+        <a href="/move/7" class="btn btn-info">{{ fields[7] }}</a>
+        <a href="/move/8" class="btn btn-info">{{ fields[8] }}</a>
+</div>
+{% endblock %}

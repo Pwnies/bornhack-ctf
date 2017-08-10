@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+    <title>TicTacToe</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="container text-center">
+    <div class="row">
+        <h1>TicTacToe</h1>
+    </div>
+    <div class="row">
+        {% block body %}{% endblock %}
+    </div>
+</body>
+<html>
