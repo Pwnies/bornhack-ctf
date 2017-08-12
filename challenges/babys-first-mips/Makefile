@@ -1,24 +1,17 @@
 CC=mips-linux-gnu-gcc
 CFLAGS=-O3 -static
 
+include ../ports.mk
+
 HANDOUT=firstmips
-PORT=1337
+DOCKER_NAME=firstmill
+DOCKER_ARGS=-p$(PORT_FIRSTMIPS):1337
+DOCKER_DEPS=firstmips run start enter-chroot
 
 firstmips: firstmips.c
 	$(CC) $(CFLAGS) firstmips.c -o firstmips
 
-handout.tar.xz: $(HANDOUT)
-	tar -cJf handout.tar.xz $^
-
-docker-build: Dockerfile firstmips
-	docker build -t firstmips .
-
-docker-start: docker-build
-	docker run -d --rm -p $(PORT):1337 firstmips > .dockerid
-
-docker-stop: .dockerid
-	docker kill $(shell cat .dockerid)
-	rm .dockerid
+include ../build.mk
 
 clean:
 	rm -f firstmips .dockerid handout.tar.xz
