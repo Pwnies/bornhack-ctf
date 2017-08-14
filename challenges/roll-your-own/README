@@ -1,0 +1,2 @@
+Either hand out `lorem` and `lorem.enc` or run `main.py` as a service.  This is
+a known plaintext attack.
