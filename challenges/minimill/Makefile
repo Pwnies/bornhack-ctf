@@ -4,8 +4,7 @@ STRIP=strip
 
 HANDOUT=minimill
 
-handout.tar.xz: $(HANDOUT)
-	tar -cJf handout.tar.xz $^
+include ../build.mk
 
 minimill: minimill.c rom.h
 	$(CC) $(CFLAGS) $< -o minimill
