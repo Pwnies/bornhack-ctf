@@ -1,0 +1,7 @@
+[package]
+name = "rustalicious"
+version = "0.1.0"
+authors = ["Kristoffer Søholm <k.soeholm@gmail.com>"]
+
+[dependencies]
+rand = "0.3"
