@@ -5,10 +5,10 @@ include ../build.mk
 PASSWORD:
 	head -c 20 /dev/urandom | xxd -ps > PASSWORD
 
-flag.enc: flag PASSWORD
+flag.enc: flag PASSWORD main.py
 	python main.py < flag > flag.enc
 
-lorem.enc: lorem PASSWORD
+lorem.enc: lorem PASSWORD main.py
 	python main.py < lorem > lorem.enc
 
 flag:

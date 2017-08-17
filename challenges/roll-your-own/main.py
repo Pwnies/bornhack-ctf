@@ -1,7 +1,6 @@
 #!/usr/bin/env python2.7
 from hashlib import sha256
 
-PASSWORD = file('PASSWORD').read().strip()
 P = 72903249772034460094762354455647169031205931523248962549937113795622619810673
 R = 2**20
 
@@ -22,15 +21,6 @@ def a2i(s):
 def kdf(password):
     return a2i(sha256(password).digest()) % P
 
-def E(x, k):
-    x = (x + k) % P
-    x = (x * 1337) % P
-    return x
-
-def D(x, k):
-    # TODO: implement this
-    return 0
-
 def crypto(magic):
     def f(text, password):
         k = kdf(password)
@@ -46,13 +36,22 @@ def crypto(magic):
         return i2a(b)
     return f
 
-enc = crypto(E)
-dec = crypto(D)
+@crypto
+def enc(x, k):
+    x = (x + k) % P
+    x = (x * 1337) % P
+    return x
+
+@crypto
+def dec(x, k):
+    # TODO: implement this
+    return 0
 
 if __name__ == '__main__':
     import signal
     import sys
     signal.alarm(50)
+    PASSWORD = file('PASSWORD').read().strip()
     plaintext = ''
     while True:
         s = sys.stdin.read()
