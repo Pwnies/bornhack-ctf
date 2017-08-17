@@ -1,0 +1,11 @@
+[package]
+authors = ["Mathias Svensson <freaken@freaken.dk>"]
+name = "crackme"
+version = "0.1.0"
+
+[dependencies]
+maplit = "0.1.4"
+typed-arena = "1.3.0"
+
+[profile.dev]
+panic = 'abort'
