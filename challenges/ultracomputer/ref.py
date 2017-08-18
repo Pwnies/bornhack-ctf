@@ -96,7 +96,7 @@ def collatz(x):
         STEPS += 1
         if x & 1:
             STEPS += 2
-            x = x * 3 + 1
+            x = (x * 3 + 1) & 0xffffffff
             odd()
         else:
             STEPS += 1

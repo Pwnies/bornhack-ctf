@@ -24,7 +24,7 @@
 
 uint32_t FLAG[5] = {0, 0, 0, 0, 0}, n = 0, x = X, i = 0, j = 0, t = 0;
 unsigned long long steps = 0;
-#define STEPS "9364283555546638214264"
+#define STEPS "2368180482241003911980"
 
 /* STEP { */
 int f00() {
