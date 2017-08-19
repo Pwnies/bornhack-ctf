@@ -6,6 +6,9 @@ import sys
 from tetrisGame import *
 
 
+FIGURES_TO_THROW = 10
+
+
 def initServer(port): 
     # Create TCP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -21,7 +24,7 @@ def initServer(port):
 
 
 def fillTetrisFrame(tetrisGame):
-    for i in range(len(tetrisGame.figures)):
+    for i in range(FIGURES_TO_THROW):
         tetrisGame.throwFigure()
 
     return tetrisGame.frame.frameData
@@ -31,15 +34,12 @@ def checkTetrisFrame(tetrisGame, clientMatrix):
     xoutFrame = copy.deepcopy(tetrisGame.frame)
     xout = xoutFrame.getXout()
     checker = CheckTetrisGame(xout, clientMatrix, tetrisGame.figures)
-    shapes = checker.findShapes()
+    figures = checker.findFigures()
     
-    match = True
-    for shapeNo, shape in shapes.items():
-        figureNo = checker.shapeNoToFigNo[shapeNo]
-        shapeMatrix = checker.createMatrixFromFigure(shape)
-        figuresInShape = checker.extractFigures(shapeMatrix, figureNo)
-        if not figuresInShape:
-            match = False
+    match = False
+
+    if(len(figures) == FIGURES_TO_THROW):
+        match = True
 
     return match
 
@@ -60,17 +60,13 @@ if __name__ == '__main__':
                 tetrisFrameData = fillTetrisFrame(tetrisGame)
                 
                 frameDump = json.dumps(tetrisFrameData)
-                print("TOSEND")
-                print(type(frameDump))
                 connection.sendall(frameDump.encode(encoding='UTF-8'))
                 
-                data = connection.recv(320)
+                data = connection.recv(520)
                 dataDecoded = data.decode(encoding='UTF-8')
-                print(dataDecoded)
                 matrix = json.loads(dataDecoded)
 
                 print(checkTetrisFrame(tetrisGame, matrix))
-                print("RUN THROUGH!")
         finally:
             # Clean up the connection
             connection.close()

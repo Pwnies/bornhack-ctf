@@ -16,6 +16,7 @@ class CheckTetrisGame:
 
         self.figures = figures
 
+    """
     def createMatrixFromFigure(self, shape):
         lowestRowNo = 100
         lowestColumnNo = 100
@@ -42,8 +43,8 @@ class CheckTetrisGame:
             matrix[row - lowestRowNo][column - lowestColumnNo] = self.returnedFrame[row][column]
 
         return TetrisFigure(matrix, "curShape")
-
-
+    """
+    """
     def extractFigures(self, shape, figureNo):
         figure = copy.deepcopy(self.figures[figureNo-1])
         #print("FOUND figureNo: " + str(figureNo))
@@ -79,7 +80,6 @@ class CheckTetrisGame:
         #print("watch")
         #print(checkShape)
 
-        """
         for row in range(len(shape.fieldData)):
             for column in range(len(shape.fieldData[row])):
                 for i in range(4):
@@ -128,8 +128,8 @@ class CheckTetrisGame:
                     #print(checkShape)
                     return False
         """
-        return True
-
+        #return True
+    """
     def splitShape(self, shape, figure, checkShape, row, column):
         #for row in range(len(shape.fieldData)):
             #for column in range(len(shape.fieldData[row])):
@@ -201,9 +201,9 @@ class CheckTetrisGame:
         
 
         return results
+    """
 
-
-    def findShapes(self):
+    def findFigures(self):
         # check xout'ed
 
 
@@ -221,10 +221,10 @@ class CheckTetrisGame:
                 figureNo = self.returnedFrame[frameRow][frameColumn]
                 self.shapeNoToFigNo[shapeNo] = figureNo
                 curShape = self.findFigure(frameRow, frameColumn, figureNo)
-                shapesFound[shapeNo] = curShape
+                if curShape:
+                    shapesFound[shapeNo] = curShape
 
         #print(shapesFound)
-
         return shapesFound
 
     def findFigure(self, startRow, startColumn, figureNo):
@@ -244,6 +244,9 @@ class CheckTetrisGame:
                 figureCoordinates.append((neighborRow, neighborColumn))
                 fieldFILO.append((neighborRow, neighborColumn))
 
+        if (len(figureCoordinates) != 4):
+            return False
+
         return figureCoordinates
 
     def returnNeighbors(self, row, column):
@@ -258,7 +261,6 @@ class CheckTetrisGame:
             neighbors.append((row, column+1))
 
         return neighbors
-
 
 
 class TetrisGame:
@@ -391,6 +393,7 @@ class TetrisFrame:
 
     def __init__(self, frameData=[]):
         self.frameData = [[0 for i in range(self.FRAME_WIDTH)] for j in range(self.FRAME_HEIGHT)]
+        self.curFigureChar = 'a'
 
     def compareFrame(self, otherFrame):
         if (len(self.frameData) != len(otherFrame.frameData)):
@@ -414,10 +417,11 @@ class TetrisFrame:
         for frameRowNo in range(freeSpaceRowNo, freeSpaceRowNo - figure.getMaxHeight(), -1):
             for frameColumnNo in range(column, column + figure.getMaxWidth()):
                 if (figure.fieldData[figureRowNo][figureColumnNo]):
-                    self.frameData[frameRowNo][frameColumnNo] = figure.fieldData[figureRowNo][figureColumnNo]
+                    self.frameData[frameRowNo][frameColumnNo] = self.curFigureChar #figure.fieldData[figureRowNo][figureColumnNo]
                 figureColumnNo += 1
             figureRowNo -= 1
             figureColumnNo = 0
+        self.curFigureChar = chr(ord(self.curFigureChar) + 1)
 
     def getXout(self):
         xoutFrameData = copy.deepcopy(self.frameData)
@@ -562,9 +566,10 @@ def printDimensions(figur):
 
 
 def createTetrisFrame():
+    FIGURES_TO_THROW = 10
     tetrisFrame = TetrisFrame()
     tetrisGame = TetrisGame(tetrisFrame)
-    for i in range(10):
+    for i in range(FIGURES_TO_THROW):
         tetrisGame.throwFigure()
         print(tetrisGame.frame)
 
@@ -574,7 +579,14 @@ def createTetrisFrame():
     print(xoutFrame)
 
     checker = CheckTetrisGame(xout, tetrisGame.frame.frameData, tetrisGame.figures)
-    shapes = checker.findShapes()
+    figures = checker.findFigures()
+    print(figures)
+    
+    match = False
+    if (len(figures) == FIGURES_TO_THROW):
+        match = True
+
+    """
     allFiguresMatch = True
     for shapeNo, shape in shapes.items():
         figureNo = checker.shapeNoToFigNo[shapeNo]
@@ -582,8 +594,9 @@ def createTetrisFrame():
         figuresInShape = checker.extractFigures(shapeMatrix, figureNo)
         if not figuresInShape:
             allFiguresMatch = False
+    """
 
-    print("Match: " + str(allFiguresMatch))
+    print("Match: " + str(match))
 
     """
     figures = [TetrisFigure(FIGURE1_DATA, "figure1"),

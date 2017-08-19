@@ -12,17 +12,12 @@ if __name__ == '__main__':
 
     try:
         while True:
-            try:
-                data = sock.recv(320)
-                if not data:
-                    break
-                dataDecoded = data.decode(encoding='UTF-8')
-                matrix = json.loads(dataDecoded)
-                for row in matrix:
-                    print(row)
-
-                sock.sendall(data)
-            finally:
+            data = sock.recv(520)
+            if not data:
                 break
+            dataDecoded = data.decode(encoding='UTF-8')
+            matrix = json.loads(dataDecoded)
+
+            sock.sendall(data)
     finally:
         sock.close()
