@@ -16,8 +16,13 @@ if __name__ == '__main__':
             if not data:
                 break
             dataDecoded = data.decode(encoding='UTF-8')
-            matrix = json.loads(dataDecoded)
+            
+            if(dataDecoded[0] != '['):
+                print(dataDecoded)
+                break
 
+            matrix = json.loads(dataDecoded)
+            
             sock.sendall(data)
     finally:
         sock.close()

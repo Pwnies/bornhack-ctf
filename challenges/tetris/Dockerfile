@@ -3,6 +3,7 @@ FROM debian:jessie
 RUN apt-get update -qy
 RUN apt-get install -qy python3 python3-dev
 
+COPY ./flag          .
 COPY ./tetrisGame.py .
 COPY ./server.py     .
 

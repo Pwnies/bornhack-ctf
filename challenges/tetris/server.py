@@ -1,12 +1,15 @@
 #!/usr/bin/python3
 
+import calendar
 import json
 import socket
 import sys
+import time
 from tetrisGame import *
 
 
-FIGURES_TO_THROW = 10
+FIGURES_TO_THROW    = 10
+GAMES_TO_SOLVE      = 100
 
 
 def initServer(port): 
@@ -53,11 +56,21 @@ if __name__ == '__main__':
         connection, client_address = sock.accept()
         
         try:
-            for i in range(100):
+            gamesSolved = 0
+            startTime = calendar.timegm(time.gmtime())
+            maxAllowedTimeUseSec = 3*60
+
+            for i in range(GAMES_TO_SOLVE):
+                curTime = calendar.timegm(time.gmtime())
+                if (curTime - startTime > maxAllowedTimeUseSec):
+                    break
+
                 tetrisFrame = TetrisFrame()
                 tetrisGame = TetrisGame(tetrisFrame)
                 tetrisFrameData = fillTetrisFrame(tetrisGame)
                 
+                # xout frame
+
                 frameDump = json.dumps(tetrisFrameData)
                 connection.sendall(frameDump.encode(encoding='UTF-8'))
                 
@@ -65,7 +78,14 @@ if __name__ == '__main__':
                 dataDecoded = data.decode(encoding='UTF-8')
                 matrix = json.loads(dataDecoded)
 
-                print(checkTetrisFrame(tetrisGame, matrix))
+                if(checkTetrisFrame(tetrisGame, matrix)):
+                    gamesSolved += 1
+
+            if(gamesSolved == GAMES_TO_SOLVE):
+                # send flag
+                flagFile = open("flag")
+                flag = flagFile.read().strip()
+                connection.sendall(flag.encode(encoding='UTF-8'))
         finally:
             # Clean up the connection
             connection.close()
