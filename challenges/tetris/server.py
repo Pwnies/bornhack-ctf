@@ -14,8 +14,9 @@ def initServer(port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # Bind socket to port
-    server_address = ('localhost', port)
-    sock.bind(server_address)
+    HOST, PORT = ('0.0.0.0', port)
+    sock.bind((HOST, PORT))
+    print("Running on " + HOST + ':' + str(PORT))
     
     # Listen for incoming connections
     sock.listen(1)
@@ -44,9 +45,7 @@ def checkTetrisFrame(tetrisGame, clientMatrix):
     return match
 
 
-
 if __name__ == '__main__':
-
     sock = initServer(8083)
 
     while True:
