@@ -10,6 +10,7 @@ from tetrisGame import *
 
 FIGURES_TO_THROW    = 10
 GAMES_TO_SOLVE      = 100
+TETRIS_FRAME_SIZE   = 10
 
 
 def initServer(port): 
@@ -31,7 +32,35 @@ def fillTetrisFrame(tetrisGame):
     for i in range(FIGURES_TO_THROW):
         tetrisGame.throwFigure()
 
-    return tetrisGame.frame.frameData
+    return tetrisGame.frame.getXout()
+
+
+def validateInput(matrix):
+    """
+    Validate that matrix is a multidimentional array (TETRIS_FRAME_SIZE X TETRIS_FRAME_SIZE),
+    and that all elements are ascii charachters (specifically the FIGURES_TO_THROW first lowercase lettes)
+    """
+
+    if(type(matrix) != list):
+        return False
+    elif(len(matrix) != TETRIS_FRAME_SIZE):
+        return False
+
+    FIRST_ASCII = ord('a')
+    LAST_ASCII = FIRST_ASCII + FIGURES_TO_THROW - 1
+    for row in range(TETRIS_FRAME_SIZE):
+        if(len(matrix[row]) != TETRIS_FRAME_SIZE):
+            return False
+        for column in range(TETRIS_FRAME_SIZE):
+            if not matrix[row][column]:
+                continue
+            if(type(matrix[row][column]) != str or len(matrix[row][column]) != 1):
+                return False
+            curAscii = ord(matrix[row][column])
+            if(curAscii < FIRST_ASCII or curAscii > LAST_ASCII):
+                return False
+
+    return True
 
 
 def checkTetrisFrame(tetrisGame, clientMatrix):
@@ -63,13 +92,12 @@ if __name__ == '__main__':
             for i in range(GAMES_TO_SOLVE):
                 curTime = calendar.timegm(time.gmtime())
                 if (curTime - startTime > maxAllowedTimeUseSec):
+                    print("Time limit exceeded")
                     break
 
                 tetrisFrame = TetrisFrame()
                 tetrisGame = TetrisGame(tetrisFrame)
                 tetrisFrameData = fillTetrisFrame(tetrisGame)
-                
-                # xout frame
 
                 frameDump = json.dumps(tetrisFrameData)
                 connection.sendall(frameDump.encode(encoding='UTF-8'))
@@ -77,6 +105,10 @@ if __name__ == '__main__':
                 data = connection.recv(520)
                 dataDecoded = data.decode(encoding='UTF-8')
                 matrix = json.loads(dataDecoded)
+
+                if not validateInput(matrix):
+                    print(str(i) + " could not validate")
+                    break
 
                 if(checkTetrisFrame(tetrisGame, matrix)):
                     gamesSolved += 1

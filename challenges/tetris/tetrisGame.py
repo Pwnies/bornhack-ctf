@@ -117,26 +117,6 @@ class TetrisGame:
         self.freeSpaceRowNo = -1
         seed()
 
-    def copyReturnedFigure(self, figure, frameReturned, frameRow,
-                           frameColumn):
-        returnedFigure = []
-
-        for row in range(len(figure.figureData)):
-            newRow = []
-            for column in range(len(figure.figureData[row])):
-                # check om frame row og column er for store
-                figureRowIndx = frameRow + row
-                figureColumnIndx = frameColumn + column
-                if ((figureRowIndx > len(frameReturned)) or (figureColumnIndx > len(frameReturned[figureRowIndx]))):
-                    return []
-                if (figure.figureData[row][column]):
-                    newRow += frameReturned[frameRow+row][frameColumn+column]
-                else:
-                    newRow += 0
-            returnedFigure += newRow
-            
-        return returnedFigure
-                
     def decideThrowColumns(self):
         columnsToThrowIn = len(self.frame.frameData[0]) - self.curFigure.getMaxWidth()
         columnsToThrowInList = [i for i in range(columnsToThrowIn + 1)]
