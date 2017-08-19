@@ -16,193 +16,6 @@ class CheckTetrisGame:
 
         self.figures = figures
 
-    """
-    def createMatrixFromFigure(self, shape):
-        lowestRowNo = 100
-        lowestColumnNo = 100
-        highestRowNo = 0
-        highestColumnNo = 0
-
-        for row, column in shape:
-            if(row < lowestRowNo):
-                lowestRowNo = row
-            if(column < lowestColumnNo):
-                lowestColumnNo = column
-            if(row > highestRowNo):
-                highestRowNo = row
-            if(column > highestColumnNo):
-                highestColumnNo = column
-
-        matrix = []
-        
-        for row in range(highestRowNo - lowestRowNo + 1):
-            matrixRow = [0 for column in range(highestColumnNo - lowestColumnNo + 1)]
-            matrix += [matrixRow]
-
-        for row, column in shape:
-            matrix[row - lowestRowNo][column - lowestColumnNo] = self.returnedFrame[row][column]
-
-        return TetrisFigure(matrix, "curShape")
-    """
-    """
-    def extractFigures(self, shape, figureNo):
-        figure = copy.deepcopy(self.figures[figureNo-1])
-        #print("FOUND figureNo: " + str(figureNo))
-        #print(shape)
-
-        squares = 0
-        for row in range(len(shape.fieldData)):
-            for column in range(len(shape.fieldData[0])):
-                if(shape.fieldData[row][column]):
-                    squares += 1
-
-        if (squares % 4 != 0):
-            #print("Not divisible by 4")
-            #print(shape)
-            #print(figure)
-            return False
-        if (squares == 4):
-            for i in range(4):
-                #print("tester figur")
-                if shape.fieldData == figure.fieldData:
-                    #print("MATCH FUNDET")
-                    #print(shape)
-                    #print(figure)
-                    return True
-                figure.rotate(1)
-        #print("MERE EN 4 GRUPPE TODO")
-        #print(shape)
-        #print(figure)
-        checkShape = TetrisFigure(copy.deepcopy(shape.fieldData), "checkShape")
-        print(shape)
-        return False
-
-        #print("watch")
-        #print(checkShape)
-
-        for row in range(len(shape.fieldData)):
-            for column in range(len(shape.fieldData[row])):
-                for i in range(4):
-                    figureHeight = figure.getMaxHeight()
-                    figureWidth = figure.getMaxWidth()
-                    print("figHeight: " + str(figureHeight))
-                    print("figWidth: " + str(figureWidth))
-                    print("row" + str(row))
-                    print("column" + str(column))
-                    #if (checkShape.fieldData[row][column] == '-'):
-                    #    print("zero")
-                    #    continue
-                    if (shape.getMaxHeight() < figureHeight or len(shape.fieldData)-row < figureHeight):
-                        print("too small height")
-                        continue
-                    if (shape.getMaxWidth() < figureWidth or len(shape.fieldData[0])-column < figureWidth):
-                        print("too small width")
-                        continue
-
-                    subShapeData = shape.subFigure(row, column, figure, checkShape)
-                    #print("Subshape")
-                    print(subShapeData)
-                    if not subShapeData:
-                        print("FILLED")
-                        continue
-
-                    if(subShapeData == figure.fieldData):
-                        print("EQUALS")
-                        checkShape.deleteFoundShape(figure, row, column)
-                    #else:
-                        #print("Not equal")
-                        #print(subShapeData)
-                        #print(figure)
-
-                    figure.rotate(1)
-
-        checkShape = self.splitShape(shape, figure, checkShape, 0, 0)
-
-        if not checkShape:
-            return False
-
-        for row in range(len(checkShape.fieldData)):
-            for column in range(len(checkShape.fieldData[row])):
-                if(checkShape.fieldData[row][column] not in (0, '-')):
-                    #print("checkShape ikke blanket")
-                    #print(checkShape)
-                    return False
-        """
-        #return True
-    """
-    def splitShape(self, shape, figure, checkShape, row, column):
-        #for row in range(len(shape.fieldData)):
-            #for column in range(len(shape.fieldData[row])):
-        passed = False
-        
-        if (checkShape.fieldData[row][column] in (0, '-')):
-            passed = True
-    
-        #print("row" + str(row))
-        #print("column" + str(column))
-        for i in range(4):
-            figure.rotate(1)
-            #print(figure)
-            figureRow = 0
-            figureColumn = figure.getFirstSquareCoordinate(figureRow)
-            figureHeight = figure.getMaxHeight()
-            figureWidth = figure.getMaxWidth()
-
-            results = []
-            #print("figHeight: " + str(figureHeight))
-            #print("figWidth: " + str(figureWidth))
-
-            # Check leftside space
-            if (column < figureColumn):
-                #print("no left space")
-                continue
-            # Check rightside space
-            if (column > shape.getMaxWidth() - figureWidth - figureColumn):
-                #print("no right space")
-                continue
-
-            if (shape.getMaxHeight() < figureHeight):
-                #print("too small height")
-                continue
-            if (shape.getMaxWidth() < figureWidth):
-                #print("too small width")
-                continue
-
-
-
-            subShapeData = shape.subFigure(row, column-figureColumn, figure, checkShape)
-            #print("Subshape")
-            #print(subShapeData)
-            if not subShapeData:
-                #print("FILLED")
-                continue
-
-            if(subShapeData == figure.fieldData):
-                #print("EQUALS - PASSED")
-                checkShapeResult = copy.deepcopy(checkShape)
-                checkShapeResult.deleteFoundShape(figure, row, column)
-                if(column < shape.getMaxWidth() - 1):
-                    results.append(self.splitShape(shape, figure, checkShapeResult, row, column+1))
-                elif(row < shape.getMaxHeight() - 1):
-                    results.append(self.splitShape(shape, figure, checkShapeResult, row+1, column))
-                if not results:
-                    return False
-                passed = True
-                break
-                    
-            #else:
-                ##print("Not equal")
-                #print(subShapeData)
-                #print(figure)
-
-        if not passed:
-            #print("NOT PASSED")
-            return False
-        
-
-        return results
-    """
-
     def findFigures(self):
         # check xout'ed
 
@@ -224,7 +37,6 @@ class CheckTetrisGame:
                 if curShape:
                     shapesFound[shapeNo] = curShape
 
-        #print(shapesFound)
         return shapesFound
 
     def findFigure(self, startRow, startColumn, figureNo):
@@ -348,7 +160,6 @@ class TetrisGame:
         if not len(columnsToThrowInList):
             return -1
 
-        #print(columnsToThrowInList)
         return choice(columnsToThrowInList)
 
     def setCurFigure(self):
@@ -362,13 +173,9 @@ class TetrisGame:
         self.curFigure.rotate(self.rotationDegree)
 
     def throwFigure(self):
-        #print('ENTERING throwFigure')
         self.setCurFigure()
-        #print(self.curFigure)
         self.setRotationDegree()
-        #print(self.rotationDegree)
         self.rotateCurFigure()
-        #print(self.curFigure)
         columnsToThrowIn = self.decideThrowColumns()
         if columnsToThrowIn == -1:
             return
@@ -417,7 +224,7 @@ class TetrisFrame:
         for frameRowNo in range(freeSpaceRowNo, freeSpaceRowNo - figure.getMaxHeight(), -1):
             for frameColumnNo in range(column, column + figure.getMaxWidth()):
                 if (figure.fieldData[figureRowNo][figureColumnNo]):
-                    self.frameData[frameRowNo][frameColumnNo] = self.curFigureChar #figure.fieldData[figureRowNo][figureColumnNo]
+                    self.frameData[frameRowNo][frameColumnNo] = self.curFigureChar 
                 figureColumnNo += 1
             figureRowNo -= 1
             figureColumnNo = 0
@@ -554,17 +361,6 @@ class TetrisFigure:
     __repr__ = __str__
 
 
-def printDimensions(figur):
-    dimensions = "----------------------------------\n"
-    for row in range(len(figur.fieldData)):
-        dimensions += "Row " + str(row) + " width: \t\t" + str(figur.measureWidth(row)) + "\n"
-    dimensions += "----------------------------------\n"
-    for column in range(len(figur.fieldData[0])):
-        dimensions += "Column " + str(column) + " height: \t" + str(figur.measureHeight(column)) + "\n"
-    dimensions += "----------------------------------\n"
-    #print(dimensions)
-
-
 def createTetrisFrame():
     FIGURES_TO_THROW = 10
     tetrisFrame = TetrisFrame()
@@ -586,52 +382,8 @@ def createTetrisFrame():
     if (len(figures) == FIGURES_TO_THROW):
         match = True
 
-    """
-    allFiguresMatch = True
-    for shapeNo, shape in shapes.items():
-        figureNo = checker.shapeNoToFigNo[shapeNo]
-        shapeMatrix = checker.createMatrixFromFigure(shape)
-        figuresInShape = checker.extractFigures(shapeMatrix, figureNo)
-        if not figuresInShape:
-            allFiguresMatch = False
-    """
-
     print("Match: " + str(match))
 
-    """
-    figures = [TetrisFigure(FIGURE1_DATA, "figure1"),
-               TetrisFigure(FIGURE2_DATA, "figure2"),
-               TetrisFigure(FIGURE3_DATA, "figure3"),
-               TetrisFigure(FIGURE4_DATA, "figure4"),
-               TetrisFigure(FIGURE5_DATA, "figure5"),
-               TetrisFigure(FIGURE6_DATA, "figure6"),
-               TetrisFigure(FIGURE7_DATA, "figure7")]
-
-    for figure in figures:
-        #print(figure)
-        #printDimensions(figure)
-
-    for figure in figures:
-        figure.rotate(1)
-
-    for figure in figures:
-        #print(figure)
-        #printDimensions(figure)
-
-    for figure in figures:
-        figure.rotate(1)
-
-    for figure in figures:
-        #print(figure)
-        #printDimensions(figure)
-
-    for figure in figures:
-        figure.rotate(1)
-
-    for figure in figures:
-        #print(figure)
-        #printDimensions(figure)
-    """
 
 if __name__ == "__main__":
     createTetrisFrame()
