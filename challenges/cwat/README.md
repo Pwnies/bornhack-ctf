@@ -48,4 +48,4 @@ Author:
 
 Tags:
 =====
-	medium, obscure, crypto, programming
+	easy, obscure, crypto, programming
