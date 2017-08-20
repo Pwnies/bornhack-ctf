@@ -9,11 +9,11 @@ Flag:
 
 Author:
 =======
-	Emil 'Dota' Bak
+	Emil 'Dota' Bak (Pwnies)
 		emilsbak@gmail.com
-	René 'Lurpak' Jacobsen
+	René 'Lurpak' Jacobsen (Pwnies)
 		rlj@rloewe.net
 
 Tags:
 =====
-	stego, easy, forensics
+	stego, very easy, forensics
