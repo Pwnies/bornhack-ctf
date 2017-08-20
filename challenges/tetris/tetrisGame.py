@@ -21,25 +21,23 @@ class CheckTetrisGame:
 
 
         fieldFILO = list()
-        shapeNo = 0
-        curShape = []
-        shapesFound = {}
-        self.shapeNoToFigNo = {}
+        figureNo = 0
+        curFigure = []
+        figuresFound = {}
 
         for frameRow in range(len(self.returnedFrame)):
             for frameColumn in range(len(self.returnedFrame[frameRow])):
                 if (self.checkSchema[frameRow][frameColumn] != 'X'):
                     continue
-                shapeNo += 1
-                figureNo = self.returnedFrame[frameRow][frameColumn]
-                self.shapeNoToFigNo[shapeNo] = figureNo
-                curShape = self.findFigure(frameRow, frameColumn, figureNo)
-                if curShape:
-                    shapesFound[shapeNo] = curShape
+                figureNo += 1
+                figureId = self.returnedFrame[frameRow][frameColumn]
+                curFigure = self.findFigure(frameRow, frameColumn, figureId)
+                if curFigure:
+                    figuresFound[figureNo] = curFigure
 
-        return shapesFound
+        return figuresFound
 
-    def findFigure(self, startRow, startColumn, figureNo):
+    def findFigure(self, startRow, startColumn, figureId):
         fieldFILO = list()
         fieldFILO.append((startRow, startColumn))
         figureCoordinates = []
@@ -50,9 +48,9 @@ class CheckTetrisGame:
             for neighborRow, neighborColumn in self.returnNeighbors(curRow, curColumn):
                 if self.checkSchema[neighborRow][neighborColumn] != 'X':
                     continue
-                if self.returnedFrame[neighborRow][neighborColumn] != figureNo:
+                if self.returnedFrame[neighborRow][neighborColumn] != figureId:
                     continue
-                self.checkSchema[neighborRow][neighborColumn] = figureNo
+                self.checkSchema[neighborRow][neighborColumn] = figureId
                 figureCoordinates.append((neighborRow, neighborColumn))
                 fieldFILO.append((neighborRow, neighborColumn))
 
@@ -179,7 +177,7 @@ class TetrisFrame:
     frameData = []
 
     def __init__(self, frameData=[]):
-        self.frameData = [[0 for i in range(self.FRAME_WIDTH)] for j in range(self.FRAME_HEIGHT)]
+        self.frameData = [['0' for i in range(self.FRAME_WIDTH)] for j in range(self.FRAME_HEIGHT)]
         self.curFigureChar = 'a'
 
     def compareFrame(self, otherFrame):
@@ -193,7 +191,7 @@ class TetrisFrame:
                     if (otherFrame.frameData[frameRow][frameColumn] != 'X'):
                         return False
                 else:
-                    if (otherFrame.frameData[frameRow][frameColumn] != 0):
+                    if (otherFrame.frameData[frameRow][frameColumn] != '0'):
                         return False
 
         return True
@@ -214,13 +212,13 @@ class TetrisFrame:
         xoutFrameData = copy.deepcopy(self.frameData)
         for frameRow in range(self.FRAME_HEIGHT):
             for frameColumn in range(self.FRAME_WIDTH):
-                if self.frameData[frameRow][frameColumn]:
+                if (self.frameData[frameRow][frameColumn] != '0'):
                     xoutFrameData[frameRow][frameColumn] = 'X'
         return xoutFrameData
 
     def isFreeSpace(self, frameRow, startColumn, width):
         for column in range(startColumn, startColumn+width):
-            if self.frameData[frameRow][column]:
+            if (self.frameData[frameRow][column] != '0'):
                 return False
         return True
 

@@ -48,15 +48,17 @@ def validateInput(matrix):
 
     FIRST_ASCII = ord('a')
     LAST_ASCII = FIRST_ASCII + FIGURES_TO_THROW - 1
+    ZERO = ord('0')
+
     for row in range(TETRIS_FRAME_SIZE):
         if(len(matrix[row]) != TETRIS_FRAME_SIZE):
             return False
         for column in range(TETRIS_FRAME_SIZE):
-            if not matrix[row][column]:
-                continue
             if(type(matrix[row][column]) != str or len(matrix[row][column]) != 1):
                 return False
             curAscii = ord(matrix[row][column])
+            if(curAscii == ZERO):
+                continue
             if(curAscii < FIRST_ASCII or curAscii > LAST_ASCII):
                 return False
 
@@ -68,7 +70,7 @@ def checkTetrisFrame(tetrisGame, clientMatrix):
     xout = xoutFrame.getXout()
     checker = CheckTetrisGame(xout, clientMatrix, tetrisGame.figures)
     figures = checker.findFigures()
-    
+
     match = False
 
     if(len(figures) == FIGURES_TO_THROW):
