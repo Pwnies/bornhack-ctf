@@ -11,6 +11,6 @@ for i in range(0,50000):
     myline =random.choice(lines)
     f.write(myline + "\n")
     if (i == 8215):
-    	f.write("flag{Good job! THIS is the flag!} \n")
+    	f.write("flag{HidingInPlainSight} \n")
 
 f.close()

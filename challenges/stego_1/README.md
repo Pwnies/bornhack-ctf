@@ -6,7 +6,7 @@ Stego_1:
 
 Flag:
 =====
-	flag{Good job! THIS is the flag!}
+	flag{HidingInPlainSight} 
 
 Solution:
 =========
@@ -17,9 +17,9 @@ Solution:
 
 Author:
 =======
-	Emil 'Dota' Bak
+	Emil 'Dota' Bak (Pwnies)
 		emilsbak@gmail.com
-	René 'Lurpak' Jacobsen
+	René 'Lurpak' Jacobsen (Pwnies)
 		rlj@rloewe.net
 
 Tags:
