@@ -19,10 +19,10 @@ Solution:
 
 Author:
 =======
-	Emil 'Dota' Bak
+	Emil 'Dota' Bak (Pwnies)
 		emilsbak@gmail.com
 
 
 Tags:
 =====
-	stego, hard, conversion, obscure
+	stego, easy, conversion, obscure, bash
