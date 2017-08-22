@@ -3,7 +3,7 @@ TARGET:=ms-picky
 ARCH:=amd64
 # ARCH:=i386
 
-all: a.out
+all: $(TARGET)
 
 CFLAGS+=-ffreestanding -fno-common -fPIE
 ASFLAGS+=-fPIE
