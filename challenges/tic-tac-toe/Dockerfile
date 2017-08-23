@@ -1,7 +1,8 @@
 FROM debian:jessie
 
 RUN apt-get update -qy
-RUN apt-get install -qy uwsgi python-flask
+RUN apt-get install -qy python-pip python-dev uwsgi
+RUN pip install flask
 
 ENV USER tictactoe
 ENV PORT 5000
@@ -12,6 +13,7 @@ EXPOSE $PORT
 COPY . /app/
 
 USER $USER
-CMD ["/usr/bin/python", "/app/app.py", "--host", "0.0.0.0"]
-
+ENV FLASK_APP app.py
+WORKDIR /app
+CMD ["python", "-m", "flask", "run", "--host=0.0.0.0", "--with-threads"]
 
