@@ -18,6 +18,7 @@ RUN useradd $USER
 COPY enter-chroot /
 COPY run /
 COPY start /chroot
+COPY flag /chroot
 COPY firstmips /chroot
 
 CMD ["/run", "/enter-chroot"]
