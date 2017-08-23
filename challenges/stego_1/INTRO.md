@@ -1,10 +1,3 @@
 Introduction:
 =============
-	Another introduction to stego challenges!
-	All you have is a weird dictionary out of order, and all
-	you have to do, is find the flag (which is unique)..!
-
-
-Hints:
-======
-	- a flag looks like this: FLAG{This_c0uld_b3_a_flag!}
+    P-please f-f-find th---e flag. It shjud be-be j---unique.
