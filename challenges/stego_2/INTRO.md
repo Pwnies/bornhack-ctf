@@ -1,10 +1,7 @@
 Introduction:
 =============
-	You are presented with an edited Wikipedia page on the
-	History of Binary Numbers. Find the hidden flag.
+    Computers are made of bleeps and bloops.[0]
+    The bleeps and bloops are like, just your opinion, man, don't even trip.[1]
 
-
-Hints:
-======
-	- The flag is NOT hidden on wikipedia.com, use only the given .txt file.
-	- Maybe the title is not a coincidence..
+    [0] https://www.youtube.com/watch?v=SWWlEo0uIRg
+    [1] https://www.youtube.com/watch?v=WTWdP5DMdsM
