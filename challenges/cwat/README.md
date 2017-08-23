@@ -5,7 +5,7 @@ CWAT:
 
 Flag:
 =====
-	flag{FurthermoreIBelieveThatJavaMustBeDestroyed}
+	FLAG{FurthermoreIBelieveThatJavaMustBeDestroyed}
 
 
 Explanation:

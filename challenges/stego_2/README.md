@@ -6,7 +6,7 @@ Stego_2:
 
 Flag:
 =====
-	flag{ASCII is fun!}
+	FLAG{ASCII is fun!}
 
 
 Solution:

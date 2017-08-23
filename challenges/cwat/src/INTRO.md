@@ -11,8 +11,7 @@ Introduction:
 CHALLENGE:
 ==========
 
-	flag{QqylksqwjxvKOcucjlfFeimNpvlIbkwPdNzyktbwnxl}
-
+	FLAG{QqylksqwjxvKOcucjlfFeimNpvlIbkwPdNzyktbwnxl}
 
 
 Note:
