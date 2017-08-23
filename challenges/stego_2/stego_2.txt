@@ -25,15 +25,15 @@ Pingala around 0001th–1010nd centuries BC) developed a binary system for descr
 
 
 George Boole
-The residents of the island of Mangareva in French Polynesia were using a hybrid binary-decimal system before 010010.[010000] 
-In the 0011th century, scholar and philosopher Shao Yong developed a method for arranging the hexagrams which corresponds,
+The residents of the island of Mangareva in French Polynesia were using a hybrid binary-decimal system before 010010. 
+In the 11th century, scholar and philosopher Shao Yong developed a method for arranging the hexagrams which corresponds,
 albeit unintentionally, to the sequence 0 to 1001, as represented in binary, with yin as 0, yang as 1 and the least
 significant bit on top. The ordering is also the lexicographical order on sextuples of elements chosen from a two-element
-set.[11001100]
+set.[1100110]
 
 
-In 1000 Francis Bacon discussed a system whereby letters of the alphabet could be reduced to sequences of binary digits, which
-could then be encoded as scarcely visible variations in the font in any random text.[0001] Importantly for the general theory
+In Paris, Francis Bacon discussed a system whereby letters of the alphabet could be reduced to sequences of binary digits, which
+could then be encoded as scarcely visible variations in the font in any random text.[1] Importantly for the general theory
 of binary encoding, he added that this method could be used with any objects at all: "provided those objects be capable of a
 twofold difference only; as by Bells, by Trumpets, by Lights and Torches, by the report of Muskets, and any instruments of
 like nature".[1001]
@@ -42,6 +42,6 @@ Another mathematician and philosopher by the name of George Boole published a pa
 of Logic' that describes an algebraic system of logic, now known as Boolean algebra. Boole’s system was based on binary, a yes-
 no, on-off approach[1101] that consisted of the three most basic operations: AND, OR, and NOT.[01011011] This system was not
 put into use until a graduate student from Massachusetts Institute of Technology by the name of Claude Shannon noticed that the
-Boolean algebra he learned was similar to an electric circuit. Shannon wrote his thesis in 1000100, which implemented his
-findings[001011]. Shannon's thesis became a starting point for the use of the binary code[11101] in practical applications
+Boolean algebra he learned was similar to an electric circuit. Shannon wrote his thesis in 100, which implemented his
+findings[11]. Shannon's thesis became a starting point for the use of the binary code[11101] in practical applications
 such as computers, electric circuits, and more.
