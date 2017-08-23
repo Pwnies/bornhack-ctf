@@ -165,7 +165,11 @@ int main(int argc, char *argv[]) {
   } while (0)
 
 #define PID 1337
+#ifdef DEBUG
+  pid = PID;
+#else
   pid = getpid();
+#endif
   UPDATE(&pid, sizeof(pid));
 
   ppid = getppid();
@@ -173,42 +177,60 @@ int main(int argc, char *argv[]) {
   name = getname(getpid());
 
 #define PNAME "powershell.exe"
+#ifdef DEBUG
+  pname = PNAME;
+#else
   pname = getname(getppid());
+#endif
   UPDATE(pname, strlen(pname));
 
 #define USER "root"
+#ifdef DEBUG
+  user = USER;
+#else
   user = getlogin();
+#endif
   UPDATE(user, strlen(user));
 
+#define BORNHACKER true
+#ifdef DEBUG
+  bornhacker = BORNHACKER;
+#else
   bornhacker = ismember("bornhack");
+#endif
   UPDATE(&bornhacker, sizeof(bornhacker));
 
 #define NCORES 1024
+#ifdef DEBUG
+  ncores = NCORES;
+#else
   ncores = MIN(sysconf(_SC_NPROCESSORS_ONLN), NCORES);
+#endif
   UPDATE(&ncores, sizeof(ncores));
 
 #define RAM (unsigned long)1<<40
+#ifdef DEBUG
+  ram = RAM;
+#else
   sysinfo(&info); ram = MIN(info.totalram, RAM);
+#endif
   UPDATE(&ram, sizeof(ram));
 
 #define SPACE (unsigned long)1<<50
+#ifdef DEBUG
+  space = SPACE;
+#else
   space = MIN(freespace("/tmp"), SPACE);
+#endif
   UPDATE(&space, sizeof(space));
 
 #define IFACES 200
-  ifaces = MIN(numifaces(), IFACES);
-  UPDATE(&ifaces, sizeof(ifaces));
-
 #ifdef DEBUG
-  pname = PNAME;
-  user = USER;
-  pid = PID;
-  bornhacker = true;
-  ncores = NCORES;
-  ram = RAM;
-  space = SPACE;
   ifaces = IFACES;
+#else
+  ifaces = MIN(numifaces(), IFACES);
 #endif
+  UPDATE(&ifaces, sizeof(ifaces));
 
   if (strcmp(pname, "powershell.exe")) {
     SADPANDA("no PowerShell^TM");
