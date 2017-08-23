@@ -1,6 +1,6 @@
 FLAG=FLAG{HidingInPlaneSight}
 
-HANDOUT=stego_1.txt
+HANDOUT=stego_1.txt INTRO.md
 
 include ../build.mk
 
