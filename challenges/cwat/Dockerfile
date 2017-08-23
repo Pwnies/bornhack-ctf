@@ -1,24 +1,17 @@
 FROM debian:stretch
 
-RUN add-apt-repository ppa:fkrull/deadsnakes
 RUN apt-get update
-RUN apt-get install python2.7
+RUN apt-get install -y python2.7 socat
 
-RUN mkdir -p /chroot/bin
-RUN mkdir -p /chroot/usr/bin
-
-RUN qemu-mips-static /usr/bin/busybox --install /chroot/bin
-RUN cp /usr/bin/qemu-mips-static /chroot/usr/bin/qemu-mips-static
-
-ENV USER mips
+ENV USER cwat
 ENV PORT 1337
 
 RUN useradd $USER
+RUN mkdir /home/$USER
+WORKDIR /home/$USER
 
-COPY enter-chroot /
-COPY run /
-COPY start /chroot
-COPY flag /chroot
-COPY firstmips /chroot
+COPY cwat.py .
+COPY run .
+RUN chmod +x run cwat.py
 
-CMD ["/run", "/enter-chroot"]
+CMD ["/run", "/cwat.py"]
