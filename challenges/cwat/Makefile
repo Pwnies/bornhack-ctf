@@ -1,4 +1,4 @@
-HANDOUT=cwat.py
+HANDOUT=cwat.py INTRO.md
 
 include ../build.mk
 
