@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 class UTM:
     _tables = {}
     linecounter = 0
