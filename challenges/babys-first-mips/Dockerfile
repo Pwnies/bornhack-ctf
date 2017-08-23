@@ -7,7 +7,7 @@ RUN apt-get install -qy busybox-static:mips qemu-user-static socat
 RUN mkdir -p /chroot/bin
 RUN mkdir -p /chroot/usr/bin
 
-RUN busybox --install /chroot/bin
+RUN qemu-mips-static /bin/busybox --install /chroot/bin
 RUN cp /usr/bin/qemu-mips-static /chroot/usr/bin/qemu-mips-static
 
 ENV USER mips
