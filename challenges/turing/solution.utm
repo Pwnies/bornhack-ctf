@@ -1,0 +1,187 @@
+#start, figure out if it is an even or uneven number
+start, b, b, r, startfindb
+startfindb, 0,0,r,startfindb
+startfindb,1,1,r,startfindb
+startfindb,b,b,l,checkeven
+checkeven, 0,0,l, shrinit
+checkeven, 1,1, l,copyinit
+
+#non-destructive number cpy
+copyinit, b,b,r, copybitloop
+copyinit,0,0,l,copyinit
+copyinit,1,1,l,copyinit
+copybitloop, 0,b,r, paste0termc
+copybitloop, 1,b,r, paste1termc
+
+#this is the 0 branch
+#first check for two blanks in a row
+paste0termc, b, b, l, paste0term
+paste0termc, 0, 0, r, paste0
+paste0termc, 1, 1, r, paste0
+#jump over the first b (end of the number)
+paste0, b, b,r, paste0b
+paste0, 0, 0, r, paste0 
+paste0, 1, 1, r, paste0
+paste0b, b, 0,l, 0loop
+paste0b, 0, 0, r, paste0b 
+paste0b, 1, 1, r, paste0b
+#loopback and write back
+0loop, 0,0,l,0loop
+0loop, 1,1,l,0loop
+0loop, b,b,l,0loopb
+0loopb, 0,0,l,0loopb
+0loopb, 1,1,l,0loopb
+0loopb, b,0,r,copybitloop
+#endcopy
+#write the last digit before exit
+paste0term,b,0,r,paste0lastb
+paste0lastb,b,b,r,paste0last
+paste0last,b,0,l,paste0gotoleft
+paste0last,0,0,r,paste0last
+paste0last,1,1,r,paste0last
+paste0gotoleft,0,0,l,paste0gotoleft
+paste0gotoleft,1,1,l,paste0gotoleft
+paste0gotoleft,b,b,l,shiftl
+#end of 0 branch
+
+#this is the 1 branch
+paste1termc, b, b, l, paste1term
+paste1termc, 0, 0, r, paste1
+paste1termc, 1, 1, r, paste1
+paste1, b, b,r, paste1b
+paste1, 0, 0, r, paste1 
+paste1, 1, 1, r, paste1
+paste1b, b, 1,l, 1loop
+paste1b, 0, 0, r, paste1b 
+paste1b, 1, 1, r, paste1b
+#loopback and write back
+1loop, 0,0,l,1loop
+1loop, 1,1,l,1loop
+1loop, b,b,l,1loopb
+1loopb, 0,0,l,1loopb
+1loopb, 1,1,l,1loopb
+1loopb, b,1,r,copybitloop
+#endcopy
+paste1term,b,1,r,paste1lastb
+paste1lastb,b,b,r,paste1last
+paste1last,b,1,l,paste1gotoleft
+paste1last,0,0,r,paste1last
+paste1last,1,1,r,paste1last
+paste1gotoleft,0,0,l,paste1gotoleft
+paste1gotoleft,1,1,l,paste1gotoleft
+paste1gotoleft,b,b,l,shiftl
+#end of 1 branch
+
+#shift number left
+shiftl,0,0,l, shiftlcarry0
+shiftl,1,0,l, shiftlcarry1
+shiftlcarry0, 1,0,l, shiftlcarry1
+shiftlcarry0, 0,0,l, shiftlcarry0
+shiftlcarry0, b,b,r, prepadd
+shiftlcarry1, 1,1,l, shiftlcarry1
+shiftlcarry1, 0,1,l, shiftlcarry0
+shiftlcarry1, b,b,r, prepadd
+#end shift number
+#new preamble to add.
+#Grab the least significant bit
+prepadd,1,1,r,prepadd
+prepadd,0,0,r,prepadd
+prepadd,b,b,l,fstadd
+fstadd,1,b,r,fst1addb
+fstadd,0,b,r,fst0addb
+#0-branch
+fst0addb,b,b,r,fst0add
+fst0add,0,0,r,fst0add
+fst0add,1,1,r,fst0add
+fst0add,b,b,l,fst0addw
+fst0addw,0,b,l,write0
+fst0addw,1,b,l,write1
+#1-branch
+fst1addb,b,b,r,fst1add
+fst1add,0,0,r,fst1add
+fst1add,1,1,r,fst1add
+fst1add,b,b,l,fst1addw
+fst1addw,0,b,l,write1
+fst1addw,1,b,l,write10
+
+addloop,0,b,r,carry0right
+addloop,1,b,r,carry1right
+addloop,b,b,r,adddone
+#addinit done
+
+#0carryright
+carry0right, 1,1,r,carry0right
+carry0right, 0,0,r,carry0right
+carry0right, b,b,r,carry0rightb
+carry0rightb, 1,1,r,carry0rightb
+carry0rightb, 0,0,r,carry0rightb
+carry0rightb, b,b,l,carry0check
+carry0check, 0,b,l,write0
+carry0check, 1,b,l,write1
+
+#carry1
+carry1right, 1,1,r,carry1right
+carry1right, 0,0,r,carry1right
+carry1right, b,b,r,carry1rightb
+carry1rightb, 1,1,r,carry1rightb
+carry1rightb, 0,0,r,carry1rightb
+carry1rightb, b,b,l,carry1check
+carry1check, 0,b,l,write1
+carry1check, 1,b,l,write10
+
+#write0
+write0,1,1,l,write0
+write0,0,0,l,write0
+write0,b,b,l,write0b
+write0b,1,1,l,write0b
+write0b,0,0,l,write0b
+write0b,b,0,l,addloop
+
+#write1
+write1,1,1,l,write1
+write1,0,0,l,write1
+write1,b,b,l,write1b
+write1b,1,1,l,write1b
+write1b,0,0,l,write1b
+write1b,b,1,l,addloop
+
+#write10
+write10,1,1,l,write10
+write10,0,0,l,write10
+write10,b,b,l,write10b
+write10b,1,1,l,write10b
+write10b,0,0,l,write10b
+write10b,b,b,l,writecarry
+writecarry,0,1,r,writecarrydone
+writecarry,1,0,l,writecarry
+writecarrydone,0,0,r,writecarrydone
+writecarrydone,1,1,r,writecarrydone
+writecarrydone,b,0,l,addloop
+
+#*3 is now done, time to +1 :D
+adddone,0,0,r,adddone
+adddone,1,1,r,adddone
+adddone,b,b,l,increment
+
+increment,1,0,l,increment
+increment,0,1,l,incrementdone
+increment,b,b,n,HALT
+incrementdone,b,b,n,HALT
+incrementdone,0,0,l,incrementdone
+incrementdone,1,1,l,incrementdone
+
+#evenbranch
+shrinit,0,0,l,shrinit
+shrinit,1,1,l,shrinit
+shrinit,b,b,r,shr
+shr,0,0,r,shr0
+shr,1,0,r,shr1
+shr0,1,0,r,shr1
+shr0,0,0,r,shr0
+shr0,b,b,l,shrdone
+shr1,1,1,r,shr1
+shr1,0,1,r,shr0
+shr1,b,b,l,shrdone
+shrdone,0,0,l,shrdone
+shrdone,1,1,l,shrdone
+shrdone,b,b,n,HALT
