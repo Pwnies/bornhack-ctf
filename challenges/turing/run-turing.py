@@ -7,7 +7,6 @@ class UTM:
     tape = ['' for x in range(5000)]
     tapepointer = 2500
     current_collatz = 24
-    flag = 'FLAG{N0w_GO_crack_engima_young_lad}'
 
     def __init__(self):
         max_len = 0
@@ -109,7 +108,8 @@ class UTM:
                 print("sorry, your machine isn't computing the correct result")
                 exit()
             self.current = 'A'
-        print(self.flag)
+        with open('flag','r') as flag:
+            print(flag.read())
 
     def extract_number(self):
         number = ''
