@@ -13,6 +13,7 @@ WORKDIR /home/$USER
 
 COPY run-turing.py .
 COPY run .
+COPY flag .
 RUN chmod 555 *
 
 EXPOSE $PORT
