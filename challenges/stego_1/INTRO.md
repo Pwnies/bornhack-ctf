@@ -7,4 +7,4 @@ Introduction:
 
 Hints:
 ======
-	- a flag looks like this: flag{This could be a flag!}
+	- a flag looks like this: FLAG{This could be a flag!}
