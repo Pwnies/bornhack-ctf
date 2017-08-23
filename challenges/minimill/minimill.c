@@ -22,7 +22,7 @@ typedef reg_t (*aluop_t)(reg_t, reg_t);
 typedef void (*inst_t)(cpu_t *, reg_t );
 
 void belt_push(cpu_t *cpu, reg_t val) {
-    cpu->regs.belt[++cpu->regs.belt_idx % 16] = val; 
+    cpu->regs.belt[++cpu->regs.belt_idx % 16] = val;
 }
 
 reg_t belt_peek(cpu_t *cpu, int off) {
@@ -109,7 +109,7 @@ aluop_t aluops[16] = {
     alu_or,     // 0x13xx
     alu_and,    // 0x14xx
     alu_not,    // 0x15xx
-    alu_equ,    // 0x16xx 
+    alu_equ,    // 0x16xx
     alu_neq,    // 0x17xx
     alu_geq,    // 0x18xx
     alu_leq,    // 0x19xx
@@ -170,8 +170,8 @@ void misc_instruction(cpu_t *cpu, reg_t inst){
         case 0: // immh
             belt_push(cpu, inst & 0xff);
             break;
-        case 1: // imml 
-            cpu->regs.belt[cpu->regs.belt_idx % 16] |= (inst & 0xff) << 8; 
+        case 1: // imml
+            cpu->regs.belt[cpu->regs.belt_idx % 16] |= (inst & 0xff) << 8;
             break;
         case 2: // rel pc
             belt_push(cpu, cpu->regs.pc + (inst & 0xff));
@@ -187,7 +187,7 @@ void misc_instruction(cpu_t *cpu, reg_t inst){
             cpu->regs.sp = belt_peek(cpu, inst & 0xf);
             break;
         case 6: // jmp bx
-            new_pc = belt_peek(cpu, inst & 0xf); 
+            new_pc = belt_peek(cpu, inst & 0xf);
             cpu->regs.pc = new_pc;
             break;
         case 14: // debug
@@ -196,7 +196,7 @@ void misc_instruction(cpu_t *cpu, reg_t inst){
         case 15: // halt 0xnn
             exit(inst & 0xff);
             break;
-    
+
     }
 }
 
@@ -238,6 +238,6 @@ int main(int argc, char **argv) {
         cpu.regs.pc += sizeof(reg_t);
         opcodes[(inst >> 12) & 0xf](&cpu, inst);
     }
-     
+
     return 0;
 }

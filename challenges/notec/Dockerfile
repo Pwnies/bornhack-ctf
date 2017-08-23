@@ -8,4 +8,5 @@ COPY ./server.py .
 
 RUN chmod +x server.py
 
+EXPOSE 1400
 ENTRYPOINT ["./server.py"]

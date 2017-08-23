@@ -1,0 +1,8 @@
+FROM debian:stretch
+
+RUN apt-get update
+RUN apt-get install -qy gcc-mips-linux-gnu make
+
+CMD cd /firstmips && \
+    make -f firstmips.mk clean && \
+    make -f firstmips.mk firstmips
