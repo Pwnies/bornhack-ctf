@@ -3,7 +3,7 @@ HANDOUT=debug.pcap
 include ../build.mk
 
 flag:
-	echo FLAG{$(shell head -c 20 /dev/urandom | xxd -ps)} > flag
+	echo FLAG{GdBs_protocol_is_the_epitome_of_design_beauty!} > flag
 
 debug.pcap: ./build.sh Dockerfile debuggee.sh debugger.sh gdbscript flag
 	./build.sh

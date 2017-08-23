@@ -14,4 +14,4 @@ COPY cwat.py .
 COPY run .
 RUN chmod +x run cwat.py
 
-CMD ["/run", "/cwat.py"]
+CMD ["./run", "./cwat.py"]

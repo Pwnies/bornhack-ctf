@@ -56,8 +56,8 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv,"d:e:",["decrypt","encrypt"])
     except getopt.GetoptError:
-        print ("Wrong input - Try again (-d, -e)")
-        print ("cwat [-argument] [input]")
+        print ("Wrong input - Try again")
+        print ("cwat -e [input]")
         sys.exit(2)
 
     for opt, arg in opts:
@@ -71,8 +71,8 @@ def main(argv):
 # Main
 if __name__ == '__main__':
     if not (sys.argv[2:]):
-        print ("Wrong input - Try again (-d, -e)")
-        print ("cwat [-argument] [input]")
+        print ("Wrong input - Try again")
+        print ("cwat -e [input]")
         print ("    Example: python cwat -e helloworld")
     main(sys.argv[1:])
 
