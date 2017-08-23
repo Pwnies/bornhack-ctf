@@ -1,6 +1,7 @@
 Introduction:
 =============
-    Attack of the birthday party gifts starts right here!
-    Relative direction of the challenges.
+    Only a birthday small-PRESENT for my Sweet16?
 
-    Pwnies would like to thank translationparty for this lossless and perfect crypto.
+    1. Read code?
+    2. Join the party?
+    3. Get birthday flag?
