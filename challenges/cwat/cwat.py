@@ -65,7 +65,8 @@ def main(argv):
         if opt in ("-e","--encrypt"):
             encrypt(arg)
         if opt in ("-d","--decrypt"):
-            decrypt(arg)
+            print ("try -e")
+            #decrypt(arg)
 
 
 # Main
