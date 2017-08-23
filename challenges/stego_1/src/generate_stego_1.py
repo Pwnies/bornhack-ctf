@@ -1,6 +1,6 @@
 # Script for generating the 'stego_1 challenge'
-# python generate_stego_1.py
-# make sure there is a 'dictionary.txt' in the same folder
+# ./generate_stego_1.py
+# make sure the 'dictionary.txt' in the same folder
 
 import random
 
@@ -11,6 +11,6 @@ for i in range(0,50000):
     myline =random.choice(lines)
     f.write(myline + "\n")
     if (i == 8215):
-    	f.write("flag{HidingInPlainSight} \n")
+    	f.write("FLAG{HidingInPlainSight} \n")
 
 f.close()

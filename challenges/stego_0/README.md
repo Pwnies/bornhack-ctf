@@ -5,7 +5,7 @@ Stego_0:
 
 Flag:
 =====
-	flag{you're a hacker, harold!}
+	FLAG{you're a hacker, harold!}
 
 Author:
 =======
