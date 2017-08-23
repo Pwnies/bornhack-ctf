@@ -5,7 +5,11 @@ docker-build: Dockerfile $(DOCKER_DEPS)
 	docker build -t $(DOCKER_NAME) .
 
 docker-start: docker-build
-	docker run -d --rm $(DOCKER_ARGS) $(DOCKER_NAME) > .dockerid
+	@if [ -e .dockerid ]; then\
+	  echo "docker is already running!";\
+	else\
+	  docker run -d --rm $(DOCKER_ARGS) $(DOCKER_NAME) > .dockerid;\
+	fi
 
 docker-stop: .dockerid
 	docker kill $(shell cat .dockerid)
