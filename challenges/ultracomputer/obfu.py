@@ -2,7 +2,7 @@
 import os
 from elftools.elf.elffile import ELFFile
 
-TARGET = 'a.out'
+TARGET = 'ultracomputer'
 
 fd = file(TARGET, 'r+')
 elf = ELFFile(file(TARGET))
