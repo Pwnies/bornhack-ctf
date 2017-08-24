@@ -12,6 +12,6 @@ flag:
 	echo FLAG{Such_stego_much_flag+wow+w0w+cow} > flag
 
 clean:
-	rm -f flag doge.jpg archive.zip handout.tar.xz
+	rm -f doge.jpg archive.zip handout.tar.xz
 
 .PHONY: clean

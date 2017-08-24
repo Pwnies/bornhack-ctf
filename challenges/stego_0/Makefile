@@ -9,6 +9,6 @@ flag:
 	echo FLAG{Ur_an_H4x0r_Harold!!1} > flag
 
 clean:
-	rm -f flag stego_0.bmp handout.tar.xz
+	rm -f stego_0.bmp handout.tar.xz
 
 .PHONY: clean
