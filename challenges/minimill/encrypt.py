@@ -17,6 +17,6 @@ def encrypt(data):
     return out
 
 import sys
-sys.stdout.write("".join(map(chr, encrypt("flag{96ebca36c4e1071b33c26d728284bb47d03c461b}\x00"))))
+sys.stdout.write("".join(map(chr, encrypt("FLAG{Next year we are having two instructions pointers one each way}\x00"))))
 sys.stdout.flush()
         
