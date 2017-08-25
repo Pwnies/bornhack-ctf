@@ -85,7 +85,6 @@ ddf0cceeai
 """)
 print("Lets play:")
 
-
 for i in range(GAMES_TO_SOLVE):
     tetrisFrame = TetrisFrame()
     tetrisGame = TetrisGame(tetrisFrame)
