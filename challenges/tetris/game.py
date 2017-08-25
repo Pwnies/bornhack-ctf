@@ -7,9 +7,9 @@ from tetrisGame import *
 
 signal.alarm(3*60)
 
-FIGURES_TO_THROW    = 10
+FIGURES_TO_THROW    = 6
 GAMES_TO_SOLVE      = 100
-TETRIS_FRAME_SIZE   = 10
+TETRIS_FRAME_SIZE   = 8
 
 def fillTetrisFrame(tetrisGame):
     for i in range(FIGURES_TO_THROW):
@@ -59,29 +59,25 @@ def checkTetrisFrame(tetrisGame, clientMatrix):
 print("Welcome to our tetris coloring game!")
 print("We send you some tetris game like(but json encoded):")
 print("""
-0000000000
-0000000000
-0000000000
-0000000000
-00000X0X00
-0XXXXXXXX0
-XXXXX0XXXX
-XXX0XXXXXX
-0XXX0XXXX0
-0XXX0X00X0
+00000000
+00000000
+00000000
+000X0000
+X00XX000
+XXX0XX00
+XXXXXXXX
+XXXXX0XX
 """)
 print("You could respond with(but json encoded):")
 print("""
-0000000000
-0000000000
-0000000000
-0000000000
-00000g0j00
-0hhfggjji0
-hhffg0ejii
-ddf0cceeai
-0ddb0ceaa0
-0bbb0c00a0
+00000000
+00000000
+00000000
+000e0000
+f00ee000
+fff0ed00
+ccadddbb
+ccaaa0bb
 """)
 print("Lets play:")
 
