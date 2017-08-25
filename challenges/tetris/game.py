@@ -99,6 +99,5 @@ for i in range(GAMES_TO_SOLVE):
         break
 else:
     # send flag
-    flagFile = open("flag")
-    flag = flagFile.read().strip()
-    connection.sendall(flag.encode(encoding='UTF-8'))
+    with open("flag") as flag:
+        print(flag.read().strip())
