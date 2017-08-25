@@ -172,8 +172,8 @@ class TetrisGame:
 
 
 class TetrisFrame:
-    FRAME_WIDTH = 10
-    FRAME_HEIGHT = 10
+    FRAME_WIDTH = 8
+    FRAME_HEIGHT = 8
     frameData = []
 
     def __init__(self, frameData=[]):
@@ -296,6 +296,7 @@ class TetrisFigure:
     def rotate(self, times):
         for i in range(times):
             self.rotateOne()
+        return self
 
     def rotateOne(self):
         rotatedData = []
@@ -340,7 +341,7 @@ class TetrisFigure:
 
 
 def createTetrisFrame():
-    FIGURES_TO_THROW = 10
+    FIGURES_TO_THROW = 6
     tetrisFrame = TetrisFrame()
     tetrisGame = TetrisGame(tetrisFrame)
     for i in range(FIGURES_TO_THROW):
@@ -351,6 +352,7 @@ def createTetrisFrame():
     xout = xoutFrame.getXout()
     xoutFrame.frameData = xout
     print(xoutFrame)
+    print(xoutFrame.frameData)
 
     checker = CheckTetrisGame(xout, tetrisGame.frame.frameData, tetrisGame.figures)
     figures = checker.findFigures()

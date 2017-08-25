@@ -8,9 +8,9 @@ import time
 from tetrisGame import *
 
 
-FIGURES_TO_THROW    = 10
+FIGURES_TO_THROW    = 6
 GAMES_TO_SOLVE      = 100
-TETRIS_FRAME_SIZE   = 10
+TETRIS_FRAME_SIZE   = 8
 
 
 def initServer(port): 
@@ -42,8 +42,12 @@ def validateInput(matrix):
     """
 
     if(type(matrix) != list):
+        print(1)
+        print(matrix)
         return False
     elif(len(matrix) != TETRIS_FRAME_SIZE):
+        print(2)
+        print(len(matrix))
         return False
 
     FIRST_ASCII = ord('a')
@@ -52,14 +56,20 @@ def validateInput(matrix):
 
     for row in range(TETRIS_FRAME_SIZE):
         if(len(matrix[row]) != TETRIS_FRAME_SIZE):
+            print(3)
+            print(len(matrix[row]))
             return False
         for column in range(TETRIS_FRAME_SIZE):
             if(type(matrix[row][column]) != str or len(matrix[row][column]) != 1):
+                print(4)
+                print(type(matrix[row][column]))
+                print(len(matrix[row][column]))
                 return False
             curAscii = ord(matrix[row][column])
             if(curAscii == ZERO):
                 continue
             if(curAscii < FIRST_ASCII or curAscii > LAST_ASCII):
+                print(curAscii)
                 return False
 
     return True
@@ -100,6 +110,7 @@ if __name__ == '__main__':
                 tetrisFrame = TetrisFrame()
                 tetrisGame = TetrisGame(tetrisFrame)
                 tetrisFrameData = fillTetrisFrame(tetrisGame)
+                print(tetrisFrameData)
 
                 frameDump = json.dumps(tetrisFrameData)
                 connection.sendall(frameDump.encode(encoding='UTF-8'))
@@ -108,12 +119,14 @@ if __name__ == '__main__':
                 dataDecoded = data.decode(encoding='UTF-8')
                 matrix = json.loads(dataDecoded)
 
+                print(matrix)
                 if not validateInput(matrix):
                     print(str(i) + " could not validate")
                     break
 
                 if(checkTetrisFrame(tetrisGame, matrix)):
                     gamesSolved += 1
+                    print(gamesSolved)
 
             if(gamesSolved == GAMES_TO_SOLVE):
                 # send flag

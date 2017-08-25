@@ -3,6 +3,7 @@
 import json
 import socket
 import sys
+from tetrisFrameSolver2 import *
 
 if __name__ == '__main__':
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -10,6 +11,7 @@ if __name__ == '__main__':
 
     sock.connect(server_address)
 
+    blocks = findBlockPossibilities()
     try:
         while True:
             data = sock.recv(520)
@@ -22,7 +24,14 @@ if __name__ == '__main__':
                 break
 
             matrix = json.loads(dataDecoded)
+            print(matrix)
+
+            solution = findASolutionFromBlocks(matrix, blocks)
+            print(solution)
+            matrix = solutionToMatrix(solution)
+            print(matrix)
+            frameDump = json.dumps(matrix)
             
-            sock.sendall(data)
+            sock.sendall(frameDump.encode(encoding='UTF-8'))
     finally:
         sock.close()
