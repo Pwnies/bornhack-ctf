@@ -59,10 +59,10 @@
     \frametitle{How did we make it?}
     \begin{itemize}
         \item Everything is running on a single machine. Hosted on Google cloud.
-        \item 1 CPU, 4GB ram. Not much, but we did not need more than that.
-        \item 25 challenges!
-        \item ~10 people!
-        \item ~2 months!
+        \item $1$ CPU, $4$ GB ram. Not much, but we did not need more than that.
+        \item $25$ challenges!
+        \item $\sim 10$ people!
+        \item $\sim 2$ months!
     \end{itemize}
 \end{frame}
 
@@ -196,7 +196,7 @@ if(flag3_ptr){
     
     \pause
 
-    Idea: read memory and follow pointer multiple times
+    Idea: read memory and follow pointers multiple times
 
     \pause
     Note that:
@@ -204,7 +204,7 @@ if(flag3_ptr){
 $ echo "AAAAAAAA-%19\$p" | ./fmtstr 
 AAAAAAAA-0x4141414141414141
     \end{lstlisting}
-    so we can place pointer on the stack, and dereference it with \%s.
+    so we can place a pointer on the stack, and dereference it with \%s.
 \end{frame}
 \begin{frame}[fragile]
     \frametitle{fmtstr, 3. flag, continued}
@@ -259,7 +259,7 @@ log.info("Flag: \"%s\"", flag.strip("\x00"))
 \begin{frame}[fragile]
     \frametitle{llama}
     
-    Just a few line of simple python code
+    Just a few lines of simple python code
 
     \begin{lstlisting}[style=custompy]
 Y = lambda f: f (lambda x: Y(f)(x))
@@ -480,6 +480,16 @@ print decrypt(flag_enc, k)
     With more fun challenges, more points, and more binaries!
 
     Join pwnies at \#gallopsled @ freenode !
+
+    \pause
+    
+    We will release most of our challenges and stuff at
+
+    https://github.com/kokjo/bornhack-ctf
+
+    \pause
+
+    We hope you will play our CTF next year!
 \end{frame}
 
 \end{document}
